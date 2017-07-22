@@ -3,8 +3,12 @@
  */
 package com.ceitechs.pro.domain.service.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author vctrowino
@@ -12,9 +16,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class Company {
-	private String companyReferenceId; 
 	private String businessName;
-	private Pro pro;
-
+	private List<Phone> phones = new ArrayList<>();
+	private Address address;
+	private String emailAddress;	
 }
