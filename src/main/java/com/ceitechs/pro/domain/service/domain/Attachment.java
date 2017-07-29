@@ -27,9 +27,14 @@ public class Attachment {
 	@Id
 	private String attachmentReferenceId;
 	
+	/**
+	 * referenceId of the owner of the attachment
+	 * might be proReferenceId, trainingReferenceId, projectReferenceId etc
+	 * according to attachmentCategoryType
+	 */
 	@Indexed
 	@NotEmpty(message = "attachment - parentreferenceId can not be null or empty.")
-	private String parentReferenceId; //This is pro referenceId of the owner of the attachment.
+	private String parentReferenceId; 
 	
 	private String fileType;
 	private double fileSize;
@@ -54,7 +59,8 @@ public class Attachment {
 	public enum attachmentCategoryType {
 		PHOTO_ID,
 		PROFILE_PICTURE,
-		OTHER
+		TRAINING,
+		PROJECT
 	}
 	
 	private String bucket; // directory stored
