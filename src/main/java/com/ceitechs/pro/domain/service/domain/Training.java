@@ -11,17 +11,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author vctro
+ * @author vctrowino
  *
  */
 @Getter
 @Setter
 public class Training {
-	private String attachmentReferenceId;
 	private String institution;
 	private LocalDate startDate; // Start date of the program Ex. 2016-05-30
 	private LocalDate endDate; // latest/last date to a program Ex. 2016-07-30
 	private String award; // Award awarded EX. Degree, certificate.
 	private String descipline; // Domain of your training Ex. IT 
-	private List<Attachment> attachments = new ArrayList<>(); // a list of attachments to support this training.
+	private List<String> attachmentReferenceIds = new ArrayList<>(); // a list of attachments to support this training.
+	private LocalDate createdDate = LocalDate.now();
 }
