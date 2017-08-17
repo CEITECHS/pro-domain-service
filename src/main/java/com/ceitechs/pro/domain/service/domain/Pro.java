@@ -34,14 +34,13 @@ public class Pro {
 	
 	private String introText;
 	
-	private String emailAddress;
 	private ArrayList<Phone> phones = new ArrayList<>(5);
 	private Address address;
 	
 	private String operatingAs; // operating model of a pro , allowed values is [Company or Individual] Ex. Individual
 	private Company company; // company details for non-individual pros
 	
-	private ProProfile proProfie;
+	private ProProfile proProfile;
 	private List<Training> trainings = new ArrayList<>();
 	private List<ServiceOffering> services = new ArrayList<>();
 	

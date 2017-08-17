@@ -22,6 +22,5 @@ public class ProProfile {
 	private String verificationCode;
 	private LocalDate verificationDate;
 	private boolean isVerified;
-	private LocalDate createdDate;
-
+	private LocalDate createdDate = LocalDate.now();
 }

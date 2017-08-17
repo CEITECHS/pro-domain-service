@@ -17,19 +17,19 @@ public interface ProRepository extends MongoRepository<Pro, String> {
 	 * @param emailAddress
 	 * @return
 	 */
-	Pro findByEmailAddressIgnoreCaseAndProfileVerifiedTrue(String emailAddress);
+	Pro findByProProfileEmailAddressIgnoreCaseAndProProfileIsVerifiedTrue(String emailAddress);
 	/**
 	 * 
 	 * @param emailAddress
 	 * @return
 	 */
-	Pro findByEmailAddressIgnoreCase(String emailAddress);
+	Pro findByProProfileEmailAddressIgnoreCase(String emailAddress);
 	/**
 	 * 
 	 * @param proReferenceId
 	 * @return
 	 */
-	Pro findByProReferenceIdIgnoreCaseAndProfileVerifiedTrue(String proReferenceId);
+	Pro findByProReferenceIdIgnoreCaseAndProProfileIsVerifiedTrue(String proReferenceId);
 	/**
 	 * 
 	 * @param proReferenceId
