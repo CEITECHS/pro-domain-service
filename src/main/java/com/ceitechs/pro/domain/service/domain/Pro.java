@@ -37,7 +37,10 @@ public class Pro {
 	private ArrayList<Phone> phones = new ArrayList<>(5);
 	private Address address;
 	
-	private String operatingAs; // operating model of a pro , allowed values is [Company or Individual] Ex. Individual
+	/**
+	 * operating model of a pro , allowed values is [Company or Individual] Ex. Individual
+	 */
+	private String operatingAs = operaratingAsCategoryType.INDIVIDUAL.toString(); 
 	private Company company; // company details for non-individual pros
 	
 	private ProProfile proProfile;
@@ -45,4 +48,9 @@ public class Pro {
 	private List<ServiceOffering> services = new ArrayList<>();
 	
 	private LocalDate createdDate = LocalDate.now();
+	
+	public enum operaratingAsCategoryType {
+		INDIVIDUAL,
+		COMPANY
+	}
 }
