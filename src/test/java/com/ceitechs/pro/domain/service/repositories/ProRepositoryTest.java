@@ -3,6 +3,11 @@
  */
 package com.ceitechs.pro.domain.service.repositories;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ceitechs.pro.domain.service.AbstractProDomainServiceIntegrationTest;
 import com.ceitechs.pro.domain.service.domain.Address;
+import com.ceitechs.pro.domain.service.domain.Phone;
 import com.ceitechs.pro.domain.service.domain.Pro;
 import com.ceitechs.pro.domain.service.domain.ProProfile;
+import com.ceitechs.pro.domain.service.domain.Training;
 import com.ceitechs.pro.domain.service.util.ProUtility;
 
 /**
@@ -24,6 +31,34 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 	private static String proReferenceId;
 	private static final String EMAIL_ADDRESS = "test@pro.com";
 	private static final String VERIFICATION_CODE = "verificationCode";
+	private static final String ADDRESS_LINE1 = "addressLine1";
+	private static final String ADDRESS_LINE2 = "addressLine2";
+	private static final String DISTRICT = "district";
+	private static final String REGION = "region";
+	private static final String PHONE_NUMBER1 = "1234567890";
+	private static final String PHONE_NUMBER2 = "0987654321";
+	private static List<Phone> phones = new ArrayList<>();
+	private static List<Training> trainings = new ArrayList<>();
+	{
+		Phone phone1 = new Phone();
+		phone1.setPhoneNumber(PHONE_NUMBER1);
+		
+		Phone phone2 = new Phone();
+		phone2.setPhoneNumber(PHONE_NUMBER2);
+		
+		phones.add(phone1);
+		phones.add(phone2);
+		
+		Training training = new Training();
+		training.setStartDate(LocalDate.parse("2006-07-01"));
+		training.setEndDate(LocalDate.parse("2009-12-09"));
+		training.setInstitution("institution");
+		training.setDescipline("descipline");
+		training.setAward("award");
+		
+		trainings.add(training);
+		
+	}
 	
 	/**
 	 * A quick pro signUp providing 
@@ -42,6 +77,8 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 		Assert.assertFalse("The signedUp pro must have not been verified yet: ", signedUpPro.getProProfile().isVerified());
 		Assert.assertEquals("The returned verification code must be same as the one used during signUp: ",
 				signedUpPro.getProProfile().getVerificationCode(), VERIFICATION_CODE);
+		Assert.assertEquals("The returned operatingAs must be same as defaulted value: ",
+				signedUpPro.getOperatingAs(), Pro.operaratingAsCategoryType.INDIVIDUAL.toString());
 		
 	}
 	
@@ -54,9 +91,54 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 	}
 	
 	@Test
-	public void testSavePro() {
-		Pro proSaved = proRepository.save(createPro());
-		Assert.assertEquals(proSaved.getProReferenceId(), proReferenceId);
+	public void testUpdateIntroText() {
+		Pro signedUpPro = proSignUp();
+		signedUpPro.setIntroText("introText");
+		Pro updatedPro = proRepository.save(signedUpPro);
+		Assert.assertEquals("The returned introText must be same as the one used during the update process: ", 
+				updatedPro.getIntroText(), "introText");
+	}
+	
+	@Test
+	public void testUpdateProBasicInfo() {
+		Pro signedUpPro = proSignUp();
+		
+		Pro pro = updateProWithBasicInfo(signedUpPro);
+		Pro updatedPro = proRepository.save(pro);
+		Assert.assertEquals("The returned firstName must be same as the one used during the update process: ", 
+				updatedPro.getFirstName(), "FName");
+		Assert.assertEquals("The returned middleName must be same as the one used during the update process: ", 
+				updatedPro.getMiddleName(), "MName");
+		Assert.assertEquals("the returned lastName must be same as the one used during the update process: ", 
+				updatedPro.getLastName(), "LName");
+	}
+	@Test
+	public void testUpdateProAddress() {
+		Pro signedUpPro = proSignUp();
+		Address address = createProAddress();
+		signedUpPro.setAddress(address);
+		Pro updatedPro = proRepository.save(signedUpPro);
+		Assert.assertEquals("The returned address must be same as the one used during the update process: ", 
+				updatedPro.getAddress(), address);
+	}
+	
+	@Test
+	public void testUpdateProPhones() {
+		Pro signedUpPro = proSignUp();
+		signedUpPro.setPhones(phones);
+		Pro updatedPro = proRepository.save(signedUpPro);
+		Assert.assertEquals("The returned phones must be same as the one used during the update process: ", 
+				updatedPro.getPhones(), phones);
+		Assert.assertTrue("The returned phones size must be greater than 1", updatedPro.getPhones().size()>1);
+	}
+	@Test
+	public void testUpdateProTrainings() {
+		Pro signedUpPro = proSignUp();
+		signedUpPro.setTrainings(trainings);
+		Pro updatedPro = proRepository.save(signedUpPro);
+		Assert.assertEquals("The returned trainings must be same as the one used during the update process: ", 
+				updatedPro.getTrainings(), trainings);
+		Assert.assertTrue("The returned training size must be greater than 0", updatedPro.getTrainings().size()>0);
 	}
 	
 	private Pro proSignUp() {
@@ -72,17 +154,20 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 		return proRepository.save(pro);
 	}
 	
-	private static Pro createPro() {
-		Pro pro = new Pro();
-		pro.setProReferenceId(proReferenceId);
-		pro.setFirstName("fName");
+	private static Address createProAddress() {
+		Address address = new Address();
+		address.setAddressLine1(ADDRESS_LINE1);
+		address.setAddressLine2(ADDRESS_LINE2);
+		address.setCountry(ProUtility.listOfCountries.TANZANIA.toString());
+		address.setDistrict(DISTRICT);
+		address.setRegion(REGION);
+		return address;
+	}
+	
+	private static Pro updateProWithBasicInfo(Pro pro) {
+		pro.setFirstName("FName");
 		pro.setMiddleName("MName");
 		pro.setLastName("LName");
-		pro.setAddress(new Address());
-		
-		ProProfile profile = new ProProfile();
-		profile.setVerified(true);
-		pro.setProProfile(profile);
 		return pro;
 	}
 	
@@ -90,6 +175,12 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 	public void setUp() {
 		proReferenceId = ProUtility.generateIdAsString();
 		proRepository.deleteAll();
+		
+	}
+	@After
+	public void tearDown() {
+		phones.clear();
+		trainings.clear();
 	}
 	
 }

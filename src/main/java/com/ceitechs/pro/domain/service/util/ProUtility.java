@@ -135,4 +135,11 @@ public class ProUtility {
 	public static String replaceHyphens(String codefrom) {
         return codefrom.replaceAll("-", "");
     }
+	
+	public enum listOfCountries {
+		TANZANIA,
+		KENYA,
+		RWANDA,
+		UGANDA
+	}
 }

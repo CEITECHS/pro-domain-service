@@ -34,7 +34,7 @@ public class Pro {
 	
 	private String introText;
 	
-	private ArrayList<Phone> phones = new ArrayList<>(5);
+	private List<Phone> phones = new ArrayList<>(5);
 	private Address address;
 	
 	/**
