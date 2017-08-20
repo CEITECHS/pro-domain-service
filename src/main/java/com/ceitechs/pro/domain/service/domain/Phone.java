@@ -15,8 +15,13 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Phone {
+	private String phoneNumber;
 	private boolean isPrimary; //Most prefered to be contacted with.
-	private String contactMethod; //method you want to be contacted using this phone number. Either by text or call.
+	/**
+	 * method you want to be contacted using this phone number. Either by text or call.
+	 * text is selected by default if you don't choose.
+	 */
+	private String contactMethod = contactMethodType.TEXT.toString(); 
 	public enum contactMethodType {
 		TEXT,
 		CALL
