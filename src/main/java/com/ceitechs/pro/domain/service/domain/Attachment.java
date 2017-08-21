@@ -4,6 +4,7 @@
 package com.ceitechs.pro.domain.service.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -11,6 +12,9 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,9 +39,6 @@ public class Attachment {
 	@Indexed
 	@NotEmpty(message = "attachment - parentreferenceId can not be null or empty.")
 	private String parentReferenceId; 
-	
-	private String fileType;
-	private double fileSize;
 	
 	@Indexed
 	@NotEmpty(message = "attachment-category can not be null or empty")
@@ -64,4 +65,22 @@ public class Attachment {
 	}
 	
 	private String bucket; // directory stored
+	
+	@JsonIgnore
+    @Transient
+    private MultipartFile attachment;
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Attachment that = (Attachment) o;
+        return Objects.equals(attachmentReferenceId, that.attachmentReferenceId) &&
+                Objects.equals(parentReferenceId, that.parentReferenceId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(attachmentReferenceId, parentReferenceId);
+    }
 }

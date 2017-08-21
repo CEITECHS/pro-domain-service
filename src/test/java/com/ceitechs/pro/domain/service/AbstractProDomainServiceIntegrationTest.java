@@ -40,6 +40,6 @@ import com.ceitechs.pro.domain.service.config.ProDomainServiceConfig;
 @ContextConfiguration(classes = {ProDomainServiceConfig.class})
 @Ignore
 public class AbstractProDomainServiceIntegrationTest {
-	protected static final Resource resource = new ClassPathResource("");
+	protected static final Resource resource = new ClassPathResource("ceitechs.png");
 
 }

@@ -14,7 +14,7 @@ import com.ceitechs.pro.domain.service.domain.Attachment;
  *
  */
 public interface AttachmentRepository extends MongoRepository<Attachment, String>{
-	//Attachment findByProReferenceIdAndActiveTrueAndCategoryProfilePicture(String proReferenceId);
 	List<Attachment> findByParentReferenceIdAndActiveTrue();
+	List<Attachment> findByParentReferenceIdAndCategoryAndThumbnailTrueAndActiveTrue(String parentReferenceId, String category);
 
 }
