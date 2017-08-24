@@ -44,9 +44,21 @@ public class AttachmentRepositoryTest extends AbstractProDomainServiceIntegratio
         List<Attachment> savedAttachments = attachmentRepository.findByParentReferenceIdAndCategoryAndThumbnailTrueAndActiveTrue(parents[0],
         		Attachment.attachmentCategoryType.PHOTO_ID.name());
         Assert.assertNotNull(savedAttachments);
-        Assert.assertTrue("retrieved size should match saved saved size", savedAttachments.stream()
+        Assert.assertTrue("retrieved size should match saved size", savedAttachments.stream()
                 .filter(Attachment::isThumbnail).filter(Attachment::isActive).collect(Collectors.toList()).size()>0);
     }
+	
+	@Test
+	public void testFindByParentReferenceIdAndCategoryAndActiveTrue() {
+		List<Attachment> attachments = createAttachments();
+        attachmentRepository.save(attachments);
+        List<Attachment> savedAttachments = attachmentRepository.findByParentReferenceIdAndCategoryAndActiveTrue(parents[0],
+        		Attachment.attachmentCategoryType.PROFILE_PICTURE.name());
+        Assert.assertNotNull(savedAttachments);
+        Assert.assertTrue("retrieved size should be 1", savedAttachments.stream()
+                .filter(Attachment::isActive).collect(Collectors.toList()).size()==1);
+		
+	}
 	
 	public static Attachment createAttachment(){
         Attachment attachment = new Attachment();
@@ -84,6 +96,7 @@ public class AttachmentRepositoryTest extends AbstractProDomainServiceIntegratio
 
             attachments.add(attachment);
         }
+        attachments.get(0).setCategory(Attachment.attachmentCategoryType.PROFILE_PICTURE.name());
         return attachments;
     }
 	
@@ -94,6 +107,5 @@ public class AttachmentRepositoryTest extends AbstractProDomainServiceIntegratio
 	
 	@After
 	public void tearDown() {
-		parents = null;
 	}
 }
