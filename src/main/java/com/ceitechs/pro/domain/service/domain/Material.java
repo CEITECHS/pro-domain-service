@@ -5,6 +5,7 @@ package com.ceitechs.pro.domain.service.domain;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -39,4 +40,17 @@ public class Material {
 	private String createdBy; //userReferenceId of person who created this.
 	
 	private LocalDate createdDate = LocalDate.now();
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Material that = (Material) o;
+        return Objects.equals(materialReferenceId, that.materialReferenceId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(materialReferenceId);
+    }
 }
