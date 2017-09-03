@@ -54,8 +54,8 @@ public class PhaseRepositoryTest extends AbstractProDomainServiceIntegrationTest
 		
 		Assert.assertEquals(phase, savedPhase);
 		phaseRepository.delete(savedPhase);
-		Phase deletedMaterial = phaseRepository.findOne(savedPhase.getPhaseReferenceId());
-		Assert.assertEquals(null, deletedMaterial);
+		Phase deletedPhase = phaseRepository.findOne(savedPhase.getPhaseReferenceId());
+		Assert.assertEquals(null, deletedPhase);
 	}
 	
 	private Phase createPhase() {
