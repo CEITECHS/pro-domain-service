@@ -22,7 +22,7 @@ import com.ceitechs.pro.domain.service.util.ProUtility;
 public class ProjectRepositoryTest extends AbstractProDomainServiceIntegrationTest {
 	@Autowired
 	private ProjectRepository projectRepository;
-	private static String phaseReferenceId;
+	private static String projectReferenceId;
 	
 	@Test
 	public void testSave() {
@@ -63,13 +63,13 @@ public class ProjectRepositoryTest extends AbstractProDomainServiceIntegrationTe
 		project.setEndDate(LocalDate.now());
 		project.setStartDate(LocalDate.now());
 		project.setProjectName("PROJECT NAME 1");
-		project.setProjectReferenceId(phaseReferenceId);
+		project.setProjectReferenceId(projectReferenceId);
 		return project;
 	}
 	
 	@Before
 	public void setUp() {
-		phaseReferenceId = ProUtility.generateIdAsString();
+		projectReferenceId = ProUtility.generateIdAsString();
 		projectRepository.deleteAll();
 	}
 	
