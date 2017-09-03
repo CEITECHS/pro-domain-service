@@ -6,6 +6,7 @@ package com.ceitechs.pro.domain.service.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -34,6 +35,7 @@ public class SubPhase {
 	private String subPhaseName;
 	
 	private String description;
+	
 	@Indexed
 	@NotEmpty(message = "subphase - phaseReferenceId can not be null or empty.")
 	private String phaseReferenceId;
@@ -45,4 +47,18 @@ public class SubPhase {
 	private String createdBy; //userReferenceId of person who created this.
 	
 	private LocalDate createdDate = LocalDate.now();
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SubPhase that = (SubPhase) o;
+        return Objects.equals(subPhaseReferenceId, that.subPhaseReferenceId) &&
+                Objects.equals(phaseReferenceId, that.phaseReferenceId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subPhaseReferenceId, phaseReferenceId);
+    }
 }
