@@ -36,6 +36,7 @@ public class Project {
 	
 	private LocalDate startDate; // the first date to a contractor started on this project Ex. 2016-05-30
 	private LocalDate endDate; // latest/last date to a contractor worked on this project Ex. 2016-07-30
+	
 	@Indexed
 	@NotEmpty(message = "project - proReferenceId can not be null or empty.")
 	private String proReferenceId; // owner of the project
