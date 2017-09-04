@@ -141,6 +141,21 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 		Assert.assertTrue("The returned training size must be greater than 0", updatedPro.getTrainings().size()>0);
 	}
 	
+	@Test
+	public void testDeleteAllProTrainings() {
+		Pro signedUpPro = proSignUp();
+		signedUpPro.setTrainings(trainings);
+		Pro updatedPro = proRepository.save(signedUpPro);
+		Assert.assertEquals("The returned trainings must be same as the one used during the update process: ", 
+				updatedPro.getTrainings(), trainings);
+		Assert.assertTrue("The returned training size must be greater than 0", updatedPro.getTrainings().size()>0);
+		Pro proWithTraining = proRepository.findOne(updatedPro.getProReferenceId());
+		proWithTraining.setTrainings(new ArrayList<>());
+		Pro proWithNoTraining = proRepository.save(proWithTraining);
+		
+		Assert.assertTrue("Training list must be empty ", proWithNoTraining.getTrainings().isEmpty());
+	}
+	
 	private Pro proSignUp() {
 		ProProfile profile = new ProProfile();
 		profile.setEmailAddress(EMAIL_ADDRESS);
