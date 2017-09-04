@@ -55,6 +55,7 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 		training.setInstitution("institution");
 		training.setDescipline("descipline");
 		training.setAward("award");
+		training.setTrainingReferenceId(ProUtility.generateIdAsString());
 		
 		trainings.add(training);
 		

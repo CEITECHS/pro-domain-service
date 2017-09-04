@@ -17,6 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Training {
+	private String trainingReferenceId;
 	private String institution;
 	private LocalDate startDate; // Start date of the program Ex. 2016-05-30
 	private LocalDate endDate; // latest/last date to a program Ex. 2016-07-30
