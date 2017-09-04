@@ -45,7 +45,6 @@ public class Pro {
 	
 	private ProProfile proProfile;
 	private List<Training> trainings = new ArrayList<>();
-	private List<ServiceOffering> services = new ArrayList<>();
 	
 	private LocalDate createdDate = LocalDate.now();
 	
