@@ -70,6 +70,37 @@ public class ServiceOfferingRepositoryTest extends AbstractProDomainServiceInteg
 		Assert.assertEquals(service, savedServices.get(0));
 	}
 	
+	@Test
+	public void testDeleteByProReferenceId() {
+		ServiceOffering service = createService();
+		ServiceOffering savedService = serviceOfferingRepository.save(service);
+		Assert.assertEquals(service, savedService);
+		serviceOfferingRepository.deleteByProReferenceId(proReferenceId);
+		List<ServiceOffering> savedServices = serviceOfferingRepository.findByProReferenceId(service.getProReferenceId());
+		Assert.assertTrue("The list must be empty ", savedServices.isEmpty());
+		
+	}
+	
+	@Test
+	public void testFindByServiceReferenceIdAndProReferenceId() {
+		ServiceOffering service = createService();
+		serviceOfferingRepository.save(service);
+		ServiceOffering savedService = serviceOfferingRepository.findByServiceReferenceIdAndProReferenceId(service.getServiceReferenceId(),
+				service.getProReferenceId());
+		Assert.assertEquals(service, savedService);
+	}
+	
+	@Test
+	public void testDeleteByServiceReferenceIdAndProReferenceId() {
+		ServiceOffering service = createService();
+		ServiceOffering savedService = serviceOfferingRepository.save(service);
+		Assert.assertEquals(service, savedService);
+		serviceOfferingRepository.deleteByServiceReferenceIdAndProReferenceId(savedService.getServiceReferenceId(), savedService.getProReferenceId());
+		ServiceOffering savedServiceAfterDelete = serviceOfferingRepository.findByServiceReferenceIdAndProReferenceId(savedService.getServiceReferenceId(),
+				savedService.getProReferenceId());
+		Assert.assertEquals(null, savedServiceAfterDelete);
+	}
+	
 	private ServiceOffering createService() {
 		ServiceOffering service = new ServiceOffering();
 		service.setProReferenceId(proReferenceId);

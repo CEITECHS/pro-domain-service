@@ -20,5 +20,23 @@ public interface ServiceOfferingRepository extends MongoRepository<ServiceOfferi
 	 * @return
 	 */
 	List<ServiceOffering> findByProReferenceId(String proReferenceId);
+	/**
+	 * 
+	 * @param proReferenceId
+	 */
+	void deleteByProReferenceId(String proReferenceId);
+	/**
+	 * 
+	 * @param serviceReferenceId
+	 * @param proReferenceId
+	 * @return
+	 */
+	ServiceOffering findByServiceReferenceIdAndProReferenceId(String serviceReferenceId, String proReferenceId);
+	/**
+	 * 
+	 * @param serviceReferenceId
+	 * @param proReferenceId
+	 */
+	void deleteByServiceReferenceIdAndProReferenceId(String serviceReferenceId, String proReferenceId);
 
 }
