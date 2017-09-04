@@ -68,13 +68,13 @@ public class ProjectRepositoryTest extends AbstractProDomainServiceIntegrationTe
 		Assert.assertEquals(LocalDate.now().minusYears(4), projects.get(2).getStartDate());
 	}
 	@Test
-	public void testDeleteAll() {
+	public void testDeleteByProReferenceId() {
 		createProjectList();
 		List<Project> projects = projectRepository.findAll();
 		Assert.assertTrue("List size must be equal to 5", projects.size()==5);
-		projectRepository.deleteAll();
+		projectRepository.deleteByProReferenceId(proReferenceId);
 		List<Project> projectsAfterDelete = projectRepository.findAll();
-		Assert.assertTrue("The size of the list must be empty ",projectsAfterDelete.isEmpty());
+		Assert.assertTrue("The size of the list must be 2 ",projectsAfterDelete.size()==2);
 	}
 	
 	private Project createProject() {

@@ -20,5 +20,10 @@ public interface ProjectRepository extends MongoRepository<Project, String>{
 	 * @return
 	 */
 	List<Project> findByProReferenceIdOrderByStartDateDesc(String proReferenceId);
+	/**
+	 * 
+	 * @param proReferenceId
+	 */
+	void deleteByProReferenceId(String proReferenceId);
 
 }
