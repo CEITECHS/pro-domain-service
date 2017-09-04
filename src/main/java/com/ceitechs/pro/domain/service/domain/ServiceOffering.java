@@ -34,7 +34,7 @@ public class ServiceOffering {
 	private String proReferenceId; // owner of the service
 	
 	private String subPhaseReferenceId;
-	private List<String> projectReferenceId = new ArrayList<>();
+	private List<String> projectReferenceIds = new ArrayList<>();
 	
 	@Override
     public boolean equals(Object o) {
