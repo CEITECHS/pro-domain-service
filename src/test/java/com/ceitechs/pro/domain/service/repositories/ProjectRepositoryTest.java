@@ -4,7 +4,6 @@
 package com.ceitechs.pro.domain.service.repositories;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -26,12 +25,6 @@ public class ProjectRepositoryTest extends AbstractProDomainServiceIntegrationTe
 	private ProjectRepository projectRepository;
 	private static String projectReferenceId;
 	private static String proReferenceId;
-	private static List<Project> projects = new ArrayList<>();
-	
-	{
-		
-		
-	}
 	
 	@Test
 	public void testSave() {
@@ -73,6 +66,15 @@ public class ProjectRepositoryTest extends AbstractProDomainServiceIntegrationTe
 		Assert.assertTrue("The size of the list must be 3",projects.size()==3);
 		Assert.assertEquals(LocalDate.now().minusYears(0), projects.get(0).getStartDate());
 		Assert.assertEquals(LocalDate.now().minusYears(4), projects.get(2).getStartDate());
+	}
+	@Test
+	public void testDeleteAll() {
+		createProjectList();
+		List<Project> projects = projectRepository.findAll();
+		Assert.assertTrue("List size must be equal to 5", projects.size()==5);
+		projectRepository.deleteAll();
+		List<Project> projectsAfterDelete = projectRepository.findAll();
+		Assert.assertTrue("The size of the list must be empty ",projectsAfterDelete.isEmpty());
 	}
 	
 	private Project createProject() {
