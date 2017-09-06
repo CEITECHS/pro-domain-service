@@ -177,6 +177,11 @@ public class ProRepositoryTest extends AbstractProDomainServiceIntegrationTest{
 		address.setCountry(ProUtility.listOfCountries.TANZANIA.toString());
 		address.setDistrict(DISTRICT);
 		address.setRegion(REGION);
+		address.setStreet("street");
+		address.setZip("zip");
+		address.setCounty("county");
+		address.setLatitude(Double.valueOf(876876786));
+		address.setLongitude(Double.valueOf(-967687877));
 		return address;
 	}
 	
