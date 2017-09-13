@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
 import com.ceitechs.pro.domain.service.util.ProUtility;
 
@@ -84,5 +85,18 @@ public class ProDomainServiceConfig {
         
 		return mailSenderImpl;
 	}
+	
+	@Bean
+    public VelocityEngineFactoryBean velocityEngine() {
+        VelocityEngineFactoryBean velocityEngineFactoryBean = new VelocityEngineFactoryBean();
+        Properties velocityProperties = new Properties();
+        velocityProperties.setProperty("resource.loader", "url"); //jar, class, file
+        velocityProperties.setProperty("url.resource.loader.class","org.apache.velocity.runtime.resource.loader.URLResourceLoader");//ClasspathResourceLoader
+        velocityProperties.setProperty("url.resource.loader.root",templatesRoot);
+        velocityProperties.setProperty("url.resource.loader.cache","true");
+        //velocityProperties.setProperty("url.resource.loader.modificationCheckInterval","5");
+        velocityEngineFactoryBean.setVelocityProperties(velocityProperties);
+        return velocityEngineFactoryBean;
+    }
 
 }
