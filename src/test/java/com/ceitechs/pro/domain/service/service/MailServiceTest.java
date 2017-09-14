@@ -17,9 +17,8 @@ import com.ceitechs.pro.domain.service.domain.ProProfile;
  */
 public class MailServiceTest extends AbstractProDomainServiceIntegrationTest {
 	@Autowired MailService mailService;
-	private String[] developerEmails = new String[]{"vctrowino@yahoo.com"};
-	//"iddyiam@gmail.com","abhikumar.singh@gmail.com",
-	
+	private String[] developerEmails = new String[]{"iddyiam@gmail.com","abhikumar.singh@gmail.com","vctrowino@yahoo.com"};
+	@Ignore
     @Test
     public void sendPlainTextEmailTest(){
         EmailModel<String> emailModel = new EmailModel<>();
@@ -33,7 +32,7 @@ public class MailServiceTest extends AbstractProDomainServiceIntegrationTest {
         emailModel.setModel(str.toString());
         mailService.sendEmail(emailModel);
     }
-
+    @Ignore
     @Test
     public void sendTemplateEMailTest(){
         EmailModel<Pro> emailModel = new EmailModel<>();
