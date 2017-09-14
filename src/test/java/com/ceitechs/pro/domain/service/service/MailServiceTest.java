@@ -15,7 +15,7 @@ import com.ceitechs.pro.domain.service.domain.ProProfile;
  * @author vctrowino
  *
  */
-public class EmailServiceTest extends AbstractProDomainServiceIntegrationTest {
+public class MailServiceTest extends AbstractProDomainServiceIntegrationTest {
 	@Autowired MailService mailService;
 	private String[] developerEmails = new String[]{"vctrowino@yahoo.com"};
 	//"iddyiam@gmail.com","abhikumar.singh@gmail.com",
