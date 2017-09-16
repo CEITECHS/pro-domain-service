@@ -76,6 +76,14 @@
         </dependency>
 		<!-- End Mail -->
 		
+		<!-- Start com.amazonaws -->
+         <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.94</version>
+        </dependency>
+        <!-- End com.amazonaws -->
+		
 		<dependency>
     		<groupId>org.easymock</groupId>
     		<artifactId>easymock</artifactId>
