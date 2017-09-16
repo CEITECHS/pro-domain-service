@@ -129,6 +129,14 @@ public class ProUtility {
 	
 	/**
 	 * 
+	 * @return
+	 */
+	public static String generateIdAsUUID() {
+        return UUID.randomUUID().toString();
+    }
+	
+	/**
+	 * 
 	 * @param codefrom
 	 * @return
 	 */
