@@ -15,6 +15,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.ceitechs.pro.domain.service.util.ProUtility;
 
 /**
@@ -85,6 +90,10 @@ public class ProDomainServiceConfig {
         
 		return mailSenderImpl;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	
 	@Bean
     public VelocityEngineFactoryBean velocityEngine() {
@@ -98,5 +107,18 @@ public class ProDomainServiceConfig {
         velocityEngineFactoryBean.setVelocityProperties(velocityProperties);
         return velocityEngineFactoryBean;
     }
-
+	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean
+    public AmazonS3 amazonS3Client() throws Exception {
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials(keyId, ProUtility.decrypt(secretKey,appliedKey));
+        return AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                .withRegion(Regions.US_EAST_1)
+                .build();
+    }
 }

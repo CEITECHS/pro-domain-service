@@ -77,10 +77,17 @@
 		<!-- End Mail -->
 		
 		<!-- Start com.amazonaws -->
-         <dependency>
+		<!-- <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-bom</artifactId>
+                <version>1.11.94</version>
+                <type>pom</type>
+                <scope>import</scope>
+        </dependency> -->
+        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.11.94</version>
+            <version>1.11.198</version>
         </dependency>
         <!-- End com.amazonaws -->
 		
