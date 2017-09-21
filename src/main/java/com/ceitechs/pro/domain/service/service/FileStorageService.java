@@ -26,10 +26,25 @@ import com.ceitechs.pro.domain.service.domain.Attachment;
  *
  */
 public interface FileStorageService {
+	/**
+	 * 
+	 * @param attachment
+	 * @return
+	 * @throws Exception
+	 */
 	Attachment storeFile(Attachment attachment) throws Exception;
-
+	/**
+	 * 
+	 * @param attachment
+	 * @return
+	 * @throws Exception
+	 */
     String resolveUrl(Attachment attachment) throws Exception;
-
+    /**
+     * 
+     * @param attachment
+     * @throws Exception
+     */
     void removeFile(Attachment attachment) throws Exception;
 }
 
@@ -48,8 +63,16 @@ class AWSS3FileStorageService implements FileStorageService {
     @Value("${s3.signedurl.timeout.milliseconds:3600000}")
     private  long signedUrlTimeout;
 
-    @Value("${s3.attachments.bucketname:pango-attachmentse}")
+    @Value("${s3.attachments.bucketname:pango-attachments}")
     private  String bucketName;
+    
+    @Autowired
+    public AWSS3FileStorageService(AmazonS3 s3Client) {
+        this.s3Client = s3Client;
+        this.transferManager = TransferManagerBuilder.standard()
+        		.withS3Client(s3Client)
+                .build();
+    }
 
 	@Override
 	public Attachment storeFile(Attachment attachment) throws Exception {
@@ -66,14 +89,6 @@ class AWSS3FileStorageService implements FileStorageService {
 	     return attachment;
 	}
 	
-	@Autowired
-    public AWSS3FileStorageService(AmazonS3 s3Client) {
-        this.s3Client = s3Client;
-        this.transferManager = TransferManagerBuilder.standard()
-        		.withS3Client(s3Client)
-                .build();
-    }
-
 	@Override
 	public String resolveUrl(Attachment attachment) throws Exception {
 		Date expiration = new Date();

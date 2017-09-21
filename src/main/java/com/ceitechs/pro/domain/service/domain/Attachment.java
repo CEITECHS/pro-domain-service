@@ -52,8 +52,8 @@ public class Attachment {
 	private String url;
 	
 	@Indexed
-	@NotEmpty(message = "attachment - userReferenceId can not be empty or null")
-	private String userReferenceId; // uploaded by
+	@NotEmpty(message = "attachment - proReferenceId can not be empty or null")
+	private String proReferenceId; // uploaded by
 	
 	private LocalDate createdDate = LocalDate.now();
 	

@@ -23,7 +23,7 @@ import com.ceitechs.pro.domain.service.config.ProDomainServiceConfig;
 		"pro.domain.service.db.password = proPreProdWriteUsrPass10", 
 		"property.holding.hours=48",
         "pro.domain.service.db.user = proWriteUser", 
-        "pro.domain.service.db.name = prodb", "pro.domain.service.bucket.name = picture",
+        "pro.domain.service.db.name = prodb", "pango.domain.service.bucket.name = picture",
         "magic.key=5rGXHCU2yoGTn600Gz9i5A==",
         "templates.root.uri = https://raw.githubusercontent.com/CEITECHS/pro-configs/master/templates/",
         "user.verification.uri=https://www.chaguapango.com/accountVerification/",
@@ -36,7 +36,7 @@ import com.ceitechs.pro.domain.service.config.ProDomainServiceConfig;
         "mail.smtp.auth=true",
         "mail.smtp.starttls.enable=true", 
         "access.key.id=AKIAJLBAJNUMLHZIUZEA", "secret.key.id=9xinRhvCzMO10uBnmFa0IqSnQFTuNk9JjFlKxkHHOdYFRFJTagTG8wKs5i4X+dQK",
-        "s3.signedurl.timeout.milliseconds=3600000", "s3.attachments.bucketname=pro-attachments"})
+        "s3.signedurl.timeout.milliseconds=3600000", "s3.attachments.bucketname=pango-attachments"})
 @ContextConfiguration(classes = {ProDomainServiceConfig.class})
 @Ignore
 public class AbstractProDomainServiceIntegrationTest {

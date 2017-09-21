@@ -44,7 +44,7 @@ public class ProDomainServiceMongoConfiguration extends AbstractMongoConfigurati
 	@Value("${pro.domain.service.db.name}")
     private String dbName;
 
-    @Value("${pro.domain.service.bucket.name}")
+    @Value("${pango.domain.service.bucket.name}")
     private String bucketName;
 
 	@Override

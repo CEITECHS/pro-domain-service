@@ -14,7 +14,12 @@ import com.ceitechs.pro.domain.service.domain.Attachment;
  *
  */
 public interface AttachmentRepository extends MongoRepository<Attachment, String>{
-	List<Attachment> findByParentReferenceIdAndActiveTrue();
+	/**
+	 * 
+	 * @param parentReferenceId
+	 * @return
+	 */
+	List<Attachment> findByParentReferenceIdAndActiveTrueOrderByCreatedDateDesc(String parentReferenceId);
 	/**
 	 * 
 	 * @param parentReferenceId
@@ -29,5 +34,11 @@ public interface AttachmentRepository extends MongoRepository<Attachment, String
 	 * @return
 	 */
 	List<Attachment> findByParentReferenceIdAndCategoryAndActiveTrue(String parentReferenceId, String category);
+	/**
+	 * 
+	 * @param attachmentReferenceId
+	 * @return
+	 */
+	Attachment findByAttachmentReferenceIdAndActiveTrue(String attachmentReferenceId);
 
 }
